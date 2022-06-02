@@ -1,7 +1,7 @@
 # Poisson-Nernst-Planck Solve
 
 Solving coupled Poisson-Nernst-Planck equation in an axisymmetric nanopipette crossection using Fenics 2019.1.0.
-We model four concentration species (K+, Cl-, Ru3+ and Ru2+), where Ruhex (Ruthenium hexamine) is actively underdoing redox at the bottom surface ($z=0$) and KCl is the supporting electrolyte. 
+We model four concentration species ($K^{+}$, $Cl^{-}$, $Ru^{3+}$ and $Ru^{2+}$), where Ruhex (Ruthenium hexamine) is actively underdoing redox at the bottom surface ($z=0$) and KCl is the supporting electrolyte. 
 
 ## Governing equations
 
@@ -11,7 +11,7 @@ We model four concentration species (K+, Cl-, Ru3+ and Ru2+), where Ruhex (Ruthe
 
 where the four species are indexed by $i=1,2,3,4$.  
 Here,  
-$i=1$ : $K^{+}$  
+$i=1$ : K$^{+}$  
 $i=2$ : $Cl^{-}$  
 $i=3$ : $Ru^{3+}$  
 $i=4$ : $Ru^{2+}$  
