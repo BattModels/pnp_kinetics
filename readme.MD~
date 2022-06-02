@@ -7,7 +7,7 @@ We model four concentration species (K$^{+}$, Cl$^{-}$, Ru$^{3+}$ and Ru$^{2+}$)
 
 1) $$\Delta \phi = \frac{-F}{\epsilon \epsilon_{o}} \sum_{j}z_{j}c_{j}$$
 
-2) $$D_{i}\Delta c_{i} = -\frac{z_{i}eD_{i}}{k_{B}T}\left( c_{i}\nabla(\phi) \right) $$
+2) $$D_{i}\Delta c_{i} = -\frac{z_{i}eD_{i}}{k_{B}T}\left( \nabla \left( c_{i}\nabla(\phi)\right) \right) $$
 
 where the four species are indexed by $i=1,2,3,4$.  
 Here,  
