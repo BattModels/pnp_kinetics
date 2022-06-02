@@ -9,9 +9,9 @@ We model four concentration species (K+, Cl-, Ru3+ and Ru2+), where Ruhex (Ruthe
 
 2) $$D_{i}\Delta c_{i} = -\frac{z_{i}eD_{i}}{k_{B}T}\left( c_{i}\nabla(\phi) \right) $$
 
-where the four species are indexed by $i=1,2,3,4$.
-
-Here $i=1$ : $K^{+}$  
+where the four species are indexed by $i=1,2,3,4$.  
+Here,  
+$i=1$ : $K^{+}$  
 $i=2$ : $Cl^{-}$  
 $i=3$ : $Ru^{3+}$  
 $i=4$ : $Ru^{2+}$  
@@ -21,14 +21,14 @@ Boundary Conditions (BCs),
 1) $\phi = 0$ at $z=l$, $0<r<a$
 2) $\phi = \phi_{o}$ at $z=0$, $0<r<a_{s}$
 
-(Dirichlet) Charge neutrality at the top surface $z=l$, $0<r<a$  
+Dirichlet charge neutrality at the top surface $z=l$, $0<r<a$  
 3) $c_{1} = 100$ mM , $c_{2} = 106$ mM, $c_{3} = 2$ mM and $c_{4} = 0$ mM  
 
 Neumann condition  
-4) $$\frac{\partial c_{i}}{\partial n} = 0$$ (At the bottom and side surfaces if i=1,2. Only at the side surface if i=3,4)  
+4) $\frac{\partial c_{i}}{\partial n} = 0$ (At the bottom and side surfaces if i=1,2. Only at the side surface if i=3,4)  
 
 Coupled Robin condition at the bottom surface (for i=3,4)  
-5) $$-D_{o}\frac{\partial c_{3}}{\partial n} = D_{o}\frac{\partial c_{4}}{\partial n} = c_{3}k_{red} - c_{4}k_{ox}$$  
+5) $-D_{o}\frac{\partial c_{3}}{\partial n} = D_{o}\frac{\partial c_{4}}{\partial n} = c_{3}k_{red} - c_{4}k_{ox}$  
 
 where $k_{red}$ and $k_{ox}$ are the rate constants derived from the selected rate theory.  
 
