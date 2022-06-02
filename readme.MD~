@@ -1,0 +1,20 @@
+# Poisson-Nernst-Planck Solve
+
+Solving coupled Poisson-Nernst-Planck equation in an axisymmetric nanopipette crossection using Fenics python code.
+
+
+
+The directory contains the following files
+```
+funcs_pnp.py # Formulation of PNP equation in UFL 
+
+run_pnp.py # Loads functions from funcs_pnp.py to iteratively converging to solution
+
+check_sol.py # Checks final concentration (c) and potential (phi) solution on boundary conditions and convergence.
+
+inital_c0.pkl # Loads initial guess vector for conc.
+
+pippete_pnp.ipynb # Benchmark and testing in jupyter notebook on nanopipette mesh
+
+test_pnp.ipynb # Testing in jupyter notebook on simple square mesh
+```
