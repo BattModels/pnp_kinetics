@@ -102,7 +102,7 @@ The overall code is divided into main solve and post processing. The following f
 5. `process_vmg.sh` : Post processing bash file for running PP codes like get_current.py. User can add user-specific PP codes. 
 6. `run.sh` : Executable file that runs `solve_vmg.sh` and `process_vmg.sh`
 
-The directories have different tests and calculations. Additional description is inside indi
+The directories have different tests and calculations. Usage description is detailed inside the directories.
 
 1. `gen_mesh/` : Generate 2D and 3D meshes using [gmesh](https://gmsh.info/).
 2. `test_mesh/` : Test mesh convergence of PNP equations using simple Butler-Volmer (BV) rate model. I-V curve is calculated at a range of overpotentials $`Vapp`$. Can add other test suites.
