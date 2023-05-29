@@ -108,7 +108,7 @@ The directories have different tests and calculations. Usage description is deta
 2. `test_mesh/` : Test mesh convergence of PNP equations using simple Butler-Volmer (BV) rate model. I-V curve is calculated at a range of overpotentials $`Vapp`$. Can add other test suites.
 3. `dragonfly_opt/` : Bayesian optimization using [Dragonfly](https://dragonfly-opt.readthedocs.io/en/master/) of the BV rate constant $`k_{o}`$ and subsequent fit of voltammogram to analytical sigmoid function. Example has 10 iteration runs of optimization. Can perform multi-variable optimization of different rate model parameters like diffusion constants $`D_{o}, D_{r}`$ and MHC-prefactor $`A`$. Directory has a readme file with more detail.
 4. `dos_incorp/` : Solving PNP and voltammogram for MHC+DOS and QC modifications. Using a sample DOS of 2-deg twisted bilayer graphene.  
-5. `ldos_incorp` : Solving PNP and voltammogram using real space local DOS in MHC rate model. Using a sample LDOS of 2-deg twisted bilayer graphene. 
+5. `ldos_incorp/` : Solving PNP and voltammogram using real space local DOS in MHC rate model. Using a sample LDOS of 2-deg twisted bilayer graphene. 
 
 ## Notes 
 * Use your Julia executable path where `.jl` script is run. 
