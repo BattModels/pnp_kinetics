@@ -1,6 +1,6 @@
-# Poisson-Nernst-Planck Solve on 2D and 3D Nanopippete Meshes
+# Poisson-Nernst-Planck Solve on Nanopippetes
 
-Solving coupled Poisson-Nernst-Planck equation in an axisymmetric nanopipette crossection using Fenics 2019.1.0. 
+Solving steady-state coupled Poisson-Nernst-Planck equation in an axisymmetric nanopipette crossection using Fenics 2019.1.0. 
 For illustration, we model four concentration species (K$`^{+}`$, Cl$`^{-}`$, Ru$`^{3+}`$ and Ru$`^{2+}`$), where Ruhex (Ruthenium hexamine) is actively underdoing redox at the bottom surface ($`z=0`$) with the electrode (twisted bilayer graphene). KCl is the supporting electrolyte. 
 
 ## Mesh
@@ -46,6 +46,9 @@ Coupled Robin condition at the bottom surface (for i=3,4)
 
 where $`k_{red}`$ and $`k_{ox}`$ are the rate constants derived from the selected rate theory, and $`D_{o}`$ and $`D_{r}`$ are diffusivity coefficients of the oxidized and reduced species respectively.
 
+As described in [ElectrochemicalKinetic.jl](https://github.com/BattModels/ElectrochemicalKinetics.jl), the supported models are Butler-Volmer, Marcus Hush, Marcus Hush Chidsey (MHC) and MHC with density of states (DOS) models. Additional effect from Quantum Capacitance in low-dimensional materials is also incorporated.
+
+We have used this package to implement MHC with DOS and local DOS of flat band materials like twisted bilayer graphene (tBLG) to inform the redox current at the bottom surface of the nano-pippete. The PDE is solved at sweep of overpotentials to get the steady state voltammogram. 
 
 ## Dependencies
 
@@ -100,8 +103,10 @@ test_pnp.ipynb # Testing in jupyter notebook on simple square mesh
 ```
 
 ## Notes 
-* Use your Julia executable path where .jl script is run. 
-* Change the $num_cores variable in .sh files for assigning different number of processes for parallelization.
+* Use your Julia executable path where `.jl` script is run. 
+* Change the $num_cores variable in `.sh` files for assigning different number of processes for parallelization.
+* Specify the mesh path in the `config.yml` file. Fenics 2019 only recognizes `.xml` format for meshes.
+* For gmesh conversion to dolfin-xml use `meshio convert mesh3D.msh mesh3D.xml`
 
 ## Contributing
 
