@@ -45,9 +45,18 @@ $`i=4`$ : Ru$`^{2+}`$
 
 Boundary Conditions (BCs), 
 
+1. Electric potential
 * $`\phi = 0 `$ at $` z=l `$, $` 0 \le r \le a_{s}`$
-* $`\phi = \phi_{o}`$ at $`z=0`$, $` 0 \le r \le a_{s}`$
+* $`\frac{\partial phi}{\partial n} = (V_{dl} - \phi)/d_{h}`$ at $`z=0`$, $` 0 \le r \le a_{s}`$
+* $`\frac{\partial phi}{\partial n} = 0`$ for the side walls
 
+where $`V_{dl}`$ is the potential of the electric double layer (EDL). We assume a linear potential drop to the bottom surface ($`z=0`$) across the Helmholtz layer as shown in this schematic. 
+
+<img src="img/Vdl.png" alt="vdl">
+
+The applied potential ($`V_{app}`$) drops non-linearly across the EDL and the quantum capacitance in low dimensional materials, as described by [Yun Yu et al.](https://www.nature.com/articles/s41557-021-00865-1)
+
+2. Concentration
 At the top surface, the concentration of K$`^{+}`$ and Ru$`^{3+}`$ are fixed and there is no redox reaction. Cl$`^{-}`$ concentration is obtained from charge neutrality. 
 These constraints are set Dirichlet boundary conditions at the top surface $`z=l`$, $` 0 \le r \le r_{s}`$.
 
@@ -58,14 +67,16 @@ Neumann condition
 <!--  <img src="img/neuman1.png" alt="neuman"> -->
 
 Coupled Robin condition at the bottom surface (for i=3,4)  
-* $`J_{o} = -D_{o}\frac{\partial c_{3}}{\partial n} = D_{r}\frac{\partial c_{4}}{\partial n} = c_{3}k_{red} - c_{4}k_{ox}`$
+* $`J_{o}(r, \theta) = -D_{o}\frac{\partial c_{3}}{\partial n} = D_{r}\frac{\partial c_{4}}{\partial n} = c_{3}k_{red}(r, \theta) - c_{4}k_{ox}(r, \theta)`$
 <!-- <img src="img/robin1.png" alt="robin">  -->
 
 where $`k_{red}`$ and $`k_{ox}`$ are the rate constants derived from the selected rate theory, and $`D_{o}`$ and $`D_{r}`$ are diffusivity coefficients of the oxidized and reduced species respectively.
 
+Rest all boundary conditions are Neumann with zero flux at the side walls of the nanopippete.
+
 The total current is derived by,
 
-$$i = F\int_{0}^{a_{s}} F\int_{0}^{2\pi} J_{o}(r, \theta) r \text{d}r\text{d}\theta$$
+$$i = F\int_{0}^{a_{s}} \int_{0}^{2\pi} J_{o}(r, \theta) r \text{d}r\text{d}\theta$$
 
 As described in [ElectrochemicalKinetics.jl](https://github.com/BattModels/ElectrochemicalKinetics.jl), the supported models are Butler-Volmer, Marcus Hush, Marcus Hush Chidsey (MHC) and MHC with density of states (DOS) models. Additional effect from Quantum Capacitance (QC) in low-dimensional materials is also incorporated.
 
