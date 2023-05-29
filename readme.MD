@@ -5,7 +5,9 @@ For illustration, we model four concentration species (K$`^{+}`$, Cl$`^{-}`$, Ru
 
 ## Mesh
 
-3D picture of the nanopippete mesh is shown,
+2D axisymmetric mesh of the nanopippete is shown,
+
+<img src="img/side_2d.png" alt="poisson">
 
 Here, 
 
@@ -26,10 +28,6 @@ The following PDEs are solved simultaneously,
 2)  Nernst Planck equation
 <img src="img/nernst_planck.png" alt="nernst">
 <!-- $$D_{i}\Delta c_{i} = -\frac{z_{i}eD_{i}}{k_{B}T}\left( \nabla \left( c_{i}\nabla \phi\right) \right) $$ -->
-
-<script type="text/javascript" id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-</script>
 
 where the four species are indexed by $`i=1,2,3,4`$.  
 Here,  
