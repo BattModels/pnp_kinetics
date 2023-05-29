@@ -1,9 +1,19 @@
 # Poisson-Nernst-Planck Solve
 
-Solving coupled Poisson-Nernst-Planck equation in an axisymmetric nanopipette crossection using Fenics 2019.1.0.
-We model four concentration species (K$`^{+}`$, Cl$`^{-}`$, Ru$`^{3+}`$ and Ru$`^{2+}`$), where Ruhex (Ruthenium hexamine) is actively underdoing redox at the bottom surface ($`z=0`$) and KCl is the supporting electrolyte. 
+Solving coupled Poisson-Nernst-Planck equation in an axisymmetric nanopipette crossection using Fenics 2019.1.0. 
+For illustration, we model four concentration species (K$`^{+}`$, Cl$`^{-}`$, Ru$`^{3+}`$ and Ru$`^{2+}`$), where Ruhex (Ruthenium hexamine) is actively underdoing redox at the bottom surface ($`z=0`$) with the electrode (twisted bilayer graphene). KCl is the supporting electrolyte. 
+
+## Mesh
+
+3D picture of the nanopippete mesh is shown,
+
+$`a_{s} = 100`$ nm is the bottom radius
+$`a_{t} = 3.5\times10^{6}`$ m is the bottom radius
+$`z_{t} = 2\times10^{-5}`$ m is the top height
 
 ## Governing equations
+
+The following partial differential equations are solved simultaneously,
 
 1) $$\Delta \phi = \frac{-F}{\epsilon \epsilon_{o}} \sum_{j}z_{j}c_{j}$$
 
@@ -21,7 +31,9 @@ Boundary Conditions (BCs),
 1) $` \phi = 0 `$ at $` z=l `$, $` 0 \le r \le a_{s}`$
 2) $`\phi = \phi_{o}`$ at $`z=0`$, $` 0 \le r \le a_{s}`$
 
-Dirichlet charge neutrality at the top surface $`z=l`$, $` 0 \le r \le a_{s}`$ 
+At the top surface, the concentration of K$`^{+}`$ and Ru$`^{3+}`$ are fixed and there is no redox reaction. Cl$`^{-}`$ concentration is obtained from charge neutrality. 
+These constraints are set Dirichlet boundary conditions at the top surface $`z=l`$, $` 0 \le r \le a_{t}`$.
+
 3) $`c_{1} = 100`$ mM , $`c_{2} = 106`$ mM, $`c_{3} = 2`$ mM and $`c_{4} = 0`$ mM  
 
 Neumann condition  
