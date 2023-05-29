@@ -67,6 +67,7 @@ pip install mat73
 3. [Install Julia](https://julialang.org/downloads/). Clone private fork of [ElectrochemicalKinetic.jl](https://github.com/mbabar09/ElectrochemicalKinetics/) to local system. Make a new environment and add packages.
 ```
 git clone https://github.com/mbabar09/ElectrochemicalKinetics/ 
+cd ElectrochemicalKinetics.jl
 activate .
 add ArgParse, YAML, CSV, MAT, Glob, Interpolations, QuadGK, ClusterManagers, SharedArrays, Distributed, Zygote, SpecialFunctions
 add Dierckx, Optim, NLsolve, DataStructures, Plots
@@ -75,6 +76,9 @@ add Dierckx, Optim, NLsolve, DataStructures, Plots
 ## Usage
 
 The directory contains the following files,
+
+1. `funcs_pnp.py` constains all helper functions for solve, saving files and post processing. 
+2. `par_pnp.py` is the actual fenics code for solving PNP equations. It loads mesh, constants from config.yml, specifies boundary conditions and the weak form.
 ```
 funcs_pnp.py # Formulation of PNP equation in UFL 
 
@@ -90,6 +94,9 @@ test_pnp.ipynb # Testing in jupyter notebook on simple square mesh
 ```
 
 ## Notes 
+Use your Julia executable path where .jl script is run. 
+
+Change the $num_cores variable in .sh files for assigning different number of processes for parallelization.
 
 ## Contributing
 
