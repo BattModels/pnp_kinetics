@@ -17,9 +17,11 @@ $`z_{t} = 2\times10^{-5}`$ m is the top height
 
 The following partial differential equations are solved simultaneously,
 
-1) $$\Delta \phi = \frac{-F}{\epsilon \epsilon_{o}} \sum_{j}z_{j}c_{j}$$
+1) Poisson equation
+$$\Delta \phi = \frac{-F}{\epsilon \epsilon_{o}} \sum_{j}z_{j}c_{j}$$
 
-2) $$D_{i}\Delta c_{i} = -\frac{z_{i}eD_{i}}{k_{B}T}\left( \nabla \left( c_{i}\nabla \phi\right) \right) $$
+2)  Nernst Planck equation
+$$D_{i}\Delta c_{i} = -\frac{z_{i}eD_{i}}{k_{B}T}\left( \nabla \left( c_{i}\nabla \phi\right) \right) $$
 
 where the four species are indexed by $`i=1,2,3,4`$.  
 Here,  
