@@ -47,20 +47,23 @@ where $`k_{red}`$ and $`k_{ox}`$ are the rate constants derived from the selecte
 
 ## Dependencies
 
-```
+
 1. Make new conda environment with legacy version of fenics (2019)
+```
 conda create -n fenicsproject -c conda-forge fenics
 source activate fenicsproject
-
+```
 2. Install dependencies; gmsh, meshio, dragonfly, shyaml, shapely, mat73
+```
 pip install --upgrade gmsh
 pip install meshio
 pip install dragonfly-opt -v
 pip install shyaml
 pip install ase
 pip install mat73
-
+```
 3. Install Julia (https://julialang.org/downloads/) and create env to add necessary packages 
+```
 activate .
 add ArgParse, YAML, CSV, MAT, Glob, Interpolations, QuadGK, ClusterManagers, SharedArrays, Distributed, Zygote, SpecialFunctions
 add Dierckx, Optim, NLsolve, DataStructures, Plots
