@@ -19,9 +19,9 @@ $`i=4`$ : Ru$`^{2+}`$
 Boundary Conditions (BCs), 
 
 1) $` \phi = 0 `$ at $` z=l `$, $` 0 \le r \le a_{s}`$
-2) $`\phi = \phi_{o}`$ at $`z=0`$, $`0<r<a_{s}`$
+2) $`\phi = \phi_{o}`$ at $`z=0`$, $` 0 \le r \le a_{s}`$
 
-Dirichlet charge neutrality at the top surface $`z=l`$, $`0<r<a_{s}`$  
+Dirichlet charge neutrality at the top surface $`z=l`$, $` 0 \le r \le a_{s}`$ 
 3) $`c_{1} = 100`$ mM , $`c_{2} = 106`$ mM, $`c_{3} = 2`$ mM and $`c_{4} = 0`$ mM  
 
 Neumann condition  
