@@ -10,7 +10,7 @@ All steps are same as for 3D mesh,
 
 4. Execute `python optimize.py` : It guesses the first set of hyperparameters and makes a new directory. Then generates new config files with the given range of $`V_{app}`$, and obtains the IV curve for that set. The loss function in `optimize.py` outputs the RMSE error with the ground truth supplied. Based on the error, the optimizer chooses a new set of hyperparameters and runs the cycle again until max iteration is reached. Loss function per iteration is pickled in `dragonfly_opt.p` or can be individually calculated from `iv_data.txt` using `python get_rmse.py folder_name`, where folder_name contains `iv_data.txt`.
 
-One can specify multiple variables in the `optimize.json` file for multi-variable optimization. 
+One can specify multiple variables in the `optimize.json` and make subsequent changes in `optimize.py` file for multi-variable optimization. 
  
 5. Execute `python get_rmse.py folder_name` to calculate RMSE error with the analytical/experimental data. The directory `folder_name` should have a complete `iv_data.txt` file. 
 
