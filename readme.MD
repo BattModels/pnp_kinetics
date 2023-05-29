@@ -19,10 +19,11 @@ The following PDEs are solved simultaneously,
 
 1) Poisson equation
 <img src="img/poisson.png" alt="poisson">
-$$\Delta \phi = \frac{-F}{\epsilon \epsilon_{o}} \sum_{j}z_{j}c_{j}$$
+#$$\Delta \phi = \frac{-F}{\epsilon \epsilon_{o}} \sum_{j}z_{j}c_{j}$$
 
 2)  Nernst Planck equation
-$$D_{i}\Delta c_{i} = -\frac{z_{i}eD_{i}}{k_{B}T}\left( \nabla \left( c_{i}\nabla \phi\right) \right) $$
+<img src="img/nernst_planck.png" alt="nernst">
+#$$D_{i}\Delta c_{i} = -\frac{z_{i}eD_{i}}{k_{B}T}\left( \nabla \left( c_{i}\nabla \phi\right) \right) $$
 
 where the four species are indexed by $`i=1,2,3,4`$.  
 Here,  
@@ -42,10 +43,12 @@ These constraints are set Dirichlet boundary conditions at the top surface $`z=l
 3) $`c_{1} = 100`$ mM , $`c_{2} = 106`$ mM, $`c_{3} = 2`$ mM and $`c_{4} = 0`$ mM  
 
 Neumann condition  
-4) $`\frac{\partial c_{i}}{\partial n} = 0`$ (At the bottom and side surfaces if $`i=1,2`$. Only at the side surface if $`i=3,4`$)  
+4) <img src="img/neuman1.png" alt="neuman">
+#$`\frac{\partial c_{i}}{\partial n} = 0`$ (At the bottom and side surfaces if $`i=1,2`$. Only at the side surface if $`i=3,4`$)  
 
 Coupled Robin condition at the bottom surface (for i=3,4)  
-5) $`-D_{o}\frac{\partial c_{3}}{\partial n} = D_{r}\frac{\partial c_{4}}{\partial n} = c_{3}k_{red} - c_{4}k_{ox}`$  
+5) <img src="img/robin1.png" alt="robin">
+#$`-D_{o}\frac{\partial c_{3}}{\partial n} = D_{r}\frac{\partial c_{4}}{\partial n} = c_{3}k_{red} - c_{4}k_{ox}`$  
 
 where $`k_{red}`$ and $`k_{ox}`$ are the rate constants derived from the selected rate theory, and $`D_{o}`$ and $`D_{r}`$ are diffusivity coefficients of the oxidized and reduced species respectively.
 
