@@ -62,7 +62,7 @@ Coupled Robin condition at the bottom surface (for i=3,4)
 
 where $`k_{red}`$ and $`k_{ox}`$ are the rate constants derived from the selected rate theory, and $`D_{o}`$ and $`D_{r}`$ are diffusivity coefficients of the oxidized and reduced species respectively.
 
-As described in [ElectrochemicalKinetic.jl](https://github.com/BattModels/ElectrochemicalKinetics.jl), the supported models are Butler-Volmer, Marcus Hush, Marcus Hush Chidsey (MHC) and MHC with density of states (DOS) models. Additional effect from Quantum Capacitance (QC) in low-dimensional materials is also incorporated.
+As described in [ElectrochemicalKinetics.jl](https://github.com/BattModels/ElectrochemicalKinetics.jl), the supported models are Butler-Volmer, Marcus Hush, Marcus Hush Chidsey (MHC) and MHC with density of states (DOS) models. Additional effect from Quantum Capacitance (QC) in low-dimensional materials is also incorporated.
 
 We have plugged-in the total DOS and real space local DOS of flat band materials like twisted bilayer graphene (tBLG) into MHC-DOS and QC functions of this package. The rate models modify the bottom Robin BC thereby changing the redox current at the bottom surface of the nano-pippete. The PDE is solved at sweep of overpotentials to get the steady state voltammogram. 
 

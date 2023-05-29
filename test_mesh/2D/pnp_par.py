@@ -24,28 +24,10 @@ with open(config_loc, 'r') as file:
 
 # Load Mesh and calculate geometry
 mesh = Mesh(mesh_file)
-bmesh = BoundaryMesh(mesh, "exterior", True)
-bm_list = []
-bm_coords = bmesh.coordinates()
 
-data_bm = np.array(comm.gather(bm_coords, root=0), dtype=object)
-if rank==0:
-    for j in range(len(data_bm)):
-        bm_list += list(data_bm[j])
-    bm_coords = np.array(bm_list)
-    bot_coords = np.array([bm_coords[i] for i in range(len(bm_coords)) if np.allclose(bm_coords[i,2],0)])
-    a_s = np.max(norm(bot_coords[:,:2], axis=1))
-    z_t = np.max(bm_coords[:,2])
-    top_coords = np.array([bm_coords[i] for i in range(len(bm_coords)) if np.allclose(bm_coords[i,2],z_t)])
-    a_t = np.max(norm(top_coords[:,:2], axis=1))
-    geo_mesh = {'a_s':round_it(a_s, 3), 'a_t':round_it(a_t, 3), 'z_t':round_it(z_t, 3)}
-else:
-    geo_mesh = None
-
-geo_mesh = comm.bcast(geo_mesh, root=0)
-a_s, a_t, z_t = geo_mesh['a_s'], geo_mesh['a_t'], geo_mesh['z_t']
+a_s, a_t, z_t = 1e-7, 3.5e-6, 2e-5 # Specify mesh geometry
 print("Mesh geometry: a_s={}, a_t={}, z_t={}".format(a_s, a_t, z_t))
-#a_s, a_t, z_t = 1e-7, 3.5e-6, 2e-5
+
 
 ## Specify ko, Vdl, Vapp from config.yaml
 print('Vapp={}, Vdl={}, k_o={}'.format(Vapp, V_dl, k_o),'\n')
@@ -63,7 +45,7 @@ def boundary(x, on_boundary):
 # v = TestFunction(V_phi)
 
 ## initialize conc                                                                                                                      
-P1 = FiniteElement('P', tetrahedron, 1)
+P1 = FiniteElement('P', triangle, 1)
 element = MixedElement([P1, P1, P1, P1, P1])
 V = FunctionSpace(mesh, element)
 
@@ -84,7 +66,7 @@ phi, c_1, c_2, c_3, c_4 = split(sol)
 ## BCs
 tol = DOLFIN_EPS
 def boundary_5(x, on_boundary):
-    return on_boundary and near(x[2], z_t, tol)
+    return on_boundary and near(x[1], z_t, tol)
 
 # phi BCs                                                                                                                               
 bc_1= DirichletBC(V.sub(0), phi_D, boundary_5)                                                                                                                      
@@ -103,7 +85,7 @@ mf.set_all(0) # initialize the function to zero
 class BottomBoundary(SubDomain):
     def inside(self, x, on_boundary):
         tol = DOLFIN_EPS
-        return near(x[2], 0.0, tol) and on_boundary # Use x[2] for 3D.
+        return near(x[1], 0.0, tol) and on_boundary # Use x[2] for 3D.
 
 bottomboundary = BottomBoundary() # instantiate it 
 
@@ -117,7 +99,7 @@ ds = Measure("ds", domain=mesh, subdomain_data=mf)
 ### Compute solution                                                                                                                    
 ## Define problem for phi                                                                                                               
 n = FacetNormal(mesh)
-#r = Expression('x[0]', degree=deg)
+r = Expression('x[0]', degree=deg)
 #nabla_phi = (z_1*c_1 + z_2*c_2 + z_3*c_3 + z_4*c_4)                                                                                    
 dphi_1 = Expression('0.0', degree=deg)
 
@@ -138,14 +120,14 @@ m1 = -(kred*c_3 - kox*c_4)/D_o # Rate theory input
 # k_model = interpolate(u_bc, V_k)
 # kred_f, kox_f = k_model[0], k_model[1]
 
-Func = (inner(grad(phi),grad(v)))*dx() - ((V_dl - phi)/d_h)*v*ds(1) \
-    - (F/(eps*eps0))*(z_1*c_1 + z_2*c_2 + z_3*c_3 + z_4*c_4)*v*dx() + dphi_1*v*ds(0) \
-    + ((inner(grad(c_1), grad(q_1))) - ((z_1/kbT)*div(c_1*grad(phi))*q_1))*dx() \
-    + ((inner(grad(c_2), grad(q_2))) - ((z_2/kbT)*div(c_2*grad(phi))*q_2))*dx() \
-    + ((inner(grad(c_3), grad(q_3))) - ((z_3/kbT)*div(c_3*grad(phi))*q_3))*dx() \
-    + ((inner(grad(c_4), grad(q_4))) - ((z_4/kbT)*div(c_4*grad(phi))*q_4))*dx() \
-    - g_1*q_1*ds() - g_2*q_2*ds() - g_3*q_3*ds(0) - g_4*q_4*ds(0) \
-    - m1*q_3*ds(1) + (D_o/D_r)*m1*q_4*ds(1) \
+Func = (inner(grad(phi),grad(v)))*r*dx() - ((V_dl - phi)/d_h)*r*v*ds(1) \
+    - (F/(eps*eps0))*(z_1*c_1 + z_2*c_2 + z_3*c_3 + z_4*c_4)*v*r*dx() + dphi_1*v*r*ds(0) \
+    + ((inner(grad(c_1), grad(q_1))) - ((z_1/kbT)*div(c_1*grad(phi))*q_1))*r*dx() \
+    + ((inner(grad(c_2), grad(q_2))) - ((z_2/kbT)*div(c_2*grad(phi))*q_2))*r*dx() \
+    + ((inner(grad(c_3), grad(q_3))) - ((z_3/kbT)*div(c_3*grad(phi))*q_3))*r*dx() \
+    + ((inner(grad(c_4), grad(q_4))) - ((z_4/kbT)*div(c_4*grad(phi))*q_4))*r*dx() \
+    - g_1*q_1*r*ds() - g_2*q_2*r*ds() - g_3*q_3*r*ds(0) - g_4*q_4*r*ds(0) \
+    - m1*q_3*r*ds(1) + (D_o/D_r)*m1*q_4*r*ds(1) \
     #- (-(kred_f*c_3 - kox_f*c_4)/D_o)*q_3*ds(1) \
     #+ (-(kred_f*c_3 - kox_f*c_4)/D_r)*q_4*ds(1) \
     
@@ -159,7 +141,7 @@ L = 0
 #c.vector().apply("")
 
 # Solver configs                                                                                                                        
-ffc_options = {"optimize": True, "quadrature_degree": 6}
+ffc_options = {"optimize": True, "quadrature_degree": 8}
 
 solver_parameters = {"nonlinear_solver": "snes",
                      "snes_solver" : {
@@ -195,12 +177,12 @@ save_sol(sol_file, sol, mesh) # Use solution to get_current.py
 #print('I = '+str(curr))
 
 ## Check solution 
-point = [0.0e-7, 0.0e-7, 0]
+point = [0.0e-7, 0.0e-7]
 p = np.array(point)
 
 bbt = mesh.bounding_box_tree()
-d_c4 = project(_c_4.dx(2), FunctionSpace(mesh, P1))
-d_c3 = project(_c_3.dx(2), FunctionSpace(mesh, P1))
+d_c4 = project(_c_4.dx(1), FunctionSpace(mesh, P1))
+d_c3 = project(_c_3.dx(1), FunctionSpace(mesh, P1))
 
 bbt_id = bbt.compute_first_entity_collision(Point(point))
 if bbt_id<mesh.num_cells():
@@ -210,7 +192,7 @@ if bbt_id<mesh.num_cells():
     _c_3.eval_cell(val, p, Cell(mesh, bbt_id))
     print("Process {}: _c_3(x) = {}".format(rank, val[0]))
     d_c4.eval_cell(val, p, Cell(mesh, bbt_id))
-    print("Process {}: dc4_dy (z=0) = {}".format(rank, val[0]))
+    print("Process {}: dc4_dy (y=0) = {}".format(rank, val[0]))
     d_c3.eval_cell(val, p, Cell(mesh, bbt_id))
-    print("Process {}: dc3_dy (z=0) = {}".format(rank, val[0]))
+    print("Process {}: dc3_dy (y=0) = {}".format(rank, val[0]))
 
