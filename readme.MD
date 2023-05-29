@@ -5,7 +5,7 @@ For illustration, we model four concentration species (K$`^{+}`$, Cl$`^{-}`$, Ru
 
 ## Mesh
 
-2D schematic of the axisymmetric mesh of the nanopippete ([Yun Yu et al.](https://www.nature.com/articles/s41557-021-00865-1)) is shown,
+We assume dimensions of the mesh as taken by [Yun Yu et al.](https://www.nature.com/articles/s41557-021-00865-1). 2D schematic of the axisymmetric mesh of the nanopippete is shown,
 
 <img src="img/mesh_2d.png" alt="poisson" width="800">
 
@@ -16,6 +16,9 @@ $`a_{s} = 100`$ nm is the bottom radius
 $`r_{s} = 3.5\times10^{-6}`$ m is the bottom radius
 
 $`l = 2\times10^{-5}`$ m is the top height
+
+**3D render in Paraview**
+<img src="img/side_3d.png" alt="poisson" width="800">
 
 ## Governing equations
 
