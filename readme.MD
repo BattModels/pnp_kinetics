@@ -75,10 +75,16 @@ add Dierckx, Optim, NLsolve, DataStructures, Plots
 
 ## Usage
 
-The directory contains the following files,
+The following files are common in all directories,
 
-1. `funcs_pnp.py` constains all helper functions for solve, saving files and post processing. 
-2. `par_pnp.py` is the actual fenics code for solving PNP equations. It loads mesh, constants from config.yml, specifies boundary conditions and the weak form.
+1. `funcs_pnp.py` : Helper functions for solve, saving files and post processing. 
+2. `pnp_par.py` : Main fenics code which solves the PNP equation. It loads mesh, constants from config.yml, specifies boundary conditions and the weak form. The code works in parallel with MPI.
+3. `solve_vmg.sh` : Main bash file that runs pnp_par.py while attaching necessary rate model data or calculating it using ElectrochemicalKinetics.jl. It makes directories and appends necessary paths in the config file.
+4. `get_current.py` : Post processing (PP) code for calculating the total current from redox reaction at the bottom surface for the given overpotential `Vapp`
+5. `process_vmg.sh` : Post processing bash file for running PP codes like get_current.py. User can add user-specific PP codes. 
+6. `run.sh` : Executable file that runs solve_vmg.sh 
+
+These files can be used for different calculations 
 ```
 funcs_pnp.py # Formulation of PNP equation in UFL 
 
@@ -94,9 +100,8 @@ test_pnp.ipynb # Testing in jupyter notebook on simple square mesh
 ```
 
 ## Notes 
-Use your Julia executable path where .jl script is run. 
-
-Change the $num_cores variable in .sh files for assigning different number of processes for parallelization.
+-Use your Julia executable path where .jl script is run. 
+-Change the $num_cores variable in .sh files for assigning different number of processes for parallelization.
 
 ## Contributing
 
