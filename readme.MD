@@ -47,8 +47,8 @@ Boundary Conditions (BCs),
 
 1. Electric potential
 * $`\phi = 0 `$ at $` z=l `$, $` 0 \le r \le a_{s}`$
-* $`\frac{\partial phi}{\partial n} = (V_{dl} - \phi)/d_{h}`$ at $`z=0`$, $` 0 \le r \le a_{s}`$
-* $`\frac{\partial phi}{\partial n} = 0`$ for the side walls
+* $`\frac{\partial \phi}{\partial n} = (V_{dl} - \phi)/d_{h}`$ at $`z=0`$, $` 0 \le r \le a_{s}`$
+* $`\frac{\partial \phi}{\partial n} = 0`$ for the side walls
 
 where $`V_{dl}`$ is the potential of the electric double layer (EDL). We assume a linear potential drop to the bottom surface ($`z=0`$) across the Helmholtz layer as shown in this schematic. 
 
@@ -57,6 +57,7 @@ where $`V_{dl}`$ is the potential of the electric double layer (EDL). We assume 
 The applied potential ($`V_{app}`$) drops non-linearly across the EDL and the quantum capacitance in low dimensional materials, as described by [Yun Yu et al.](https://www.nature.com/articles/s41557-021-00865-1)
 
 2. Concentration
+
 At the top surface, the concentration of K$`^{+}`$ and Ru$`^{3+}`$ are fixed and there is no redox reaction. Cl$`^{-}`$ concentration is obtained from charge neutrality. 
 These constraints are set Dirichlet boundary conditions at the top surface $`z=l`$, $` 0 \le r \le r_{s}`$.
 
