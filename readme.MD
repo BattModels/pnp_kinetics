@@ -15,7 +15,7 @@ $`z_{t} = 2\times10^{-5}`$ m is the top height
 
 ## Governing equations
 
-The following partial differential equations are solved simultaneously,
+The following PDEs are solved simultaneously,
 
 1) Poisson equation
 $$\Delta \phi = \frac{-F}{\epsilon \epsilon_{o}} \sum_{j}z_{j}c_{j}$$
