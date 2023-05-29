@@ -5,9 +5,9 @@ For illustration, we model four concentration species (K$`^{+}`$, Cl$`^{-}`$, Ru
 
 ## Mesh
 
-2D axisymmetric mesh of the nanopippete is shown,
+2D schematic of the axisymmetric mesh of the nanopippete is shown,
 
-<img src="img/side_2d.png" alt="poisson">
+<img src="img/mesh_2d.png" alt="poisson">
 
 Here, 
 
