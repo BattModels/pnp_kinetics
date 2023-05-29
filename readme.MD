@@ -9,30 +9,54 @@ We model four concentration species (K$^{+}$, Cl$^{-}$, Ru$^{3+}$ and Ru$^{2+}$)
 
 2) $$D_{i}\Delta c_{i} = -\frac{z_{i}eD_{i}}{k_{B}T}\left( \nabla \left( c_{i}\nabla \phi\right) \right) $$
 
-where the four species are indexed by $i=1,2,3,4$.  
+where the four species are indexed by i=1,2,3,4.  
 Here,  
-$i=1$ : K$^{+}$  
-$i=2$ : Cl$^{-}$  
-$i=3$ : Ru$^{3+}$  
-$i=4$ : Ru$^{2+}$  
+$i=1$ : K$$^{+}$$  
+$i=2$ : Cl$$^{-}$$  
+$i=3$ : Ru$$^{3+}$$  
+$i=4$ : Ru$$^{2+}$$  
 
 Boundary Conditions (BCs), 
 
-1) $\phi = 0$ at $z=l$, $0<r<a$
-2) $\phi = \phi_{o}$ at $z=0$, $0<r<a_{s}$
+1) $$\phi = 0$$ at $$z=l$$, $$0<r<a_{s}$$
+2) $$\phi = \phi_{o}$$ at $z=0$, $$0<r<a_{s}$$
 
-Dirichlet charge neutrality at the top surface $z=l$, $0<r<a$  
-3) $c_{1} = 100$ mM , $c_{2} = 106$ mM, $c_{3} = 2$ mM and $c_{4} = 0$ mM  
+Dirichlet charge neutrality at the top surface $$z=l$$, $$0<r<a_{s}$$  
+3) $$c_{1} = 100$$ mM , $$c_{2} = 106$$ mM, $$c_{3} = 2$$ mM and $$c_{4} = 0$$ mM  
 
 Neumann condition  
-4) $\frac{\partial c_{i}}{\partial n} = 0$ (At the bottom and side surfaces if i=1,2. Only at the side surface if i=3,4)  
+4) $$\frac{\partial c_{i}}{\partial n} = 0$$ (At the bottom and side surfaces if i=1,2. Only at the side surface if i=3,4)  
 
 Coupled Robin condition at the bottom surface (for i=3,4)  
-5) $-D_{o}\frac{\partial c_{3}}{\partial n} = D_{r}\frac{\partial c_{4}}{\partial n} = c_{3}k_{red} - c_{4}k_{ox}$  
+5) $$-D_{o}\frac{\partial c_{3}}{\partial n} = D_{r}\frac{\partial c_{4}}{\partial n} = c_{3}k_{red} - c_{4}k_{ox}$$  
 
-where $k_{red}$ and $k_{ox}$ are the rate constants derived from the selected rate theory, and $D_{o}$ and $D_{r}$ are diffusivity coefficients of the oxidized and reduced species respectively.
+where $$k_{red}$$ and $$k_{ox}$$ are the rate constants derived from the selected rate theory, and $$D_{o}$$ and $$D_{r}$$ are diffusivity coefficients of the oxidized and reduced species respectively.
+
+
+## Dependencies
+
+```
+1. Make new conda environment with legacy version of fenics (2019)
+conda create -n fenicsproject -c conda-forge fenics
+source activate fenicsproject
+
+2. Install dependencies; gmsh, meshio, dragonfly, shyaml, shapely, mat73
+pip install --upgrade gmsh
+pip install meshio
+pip install dragonfly-opt -v
+pip install shyaml
+pip install ase
+pip install mat73
+
+3. Install Julia and create env to add necessary packages 
+Install julia from https://julialang.org/downloads/
+activate .
+add ArgParse, YAML, CSV, MAT, Glob, Interpolations, QuadGK, ClusterManagers, SharedArrays, Distributed, Zygote, SpecialFunctions
+add Dierckx, Optim, NLsolve, DataStructures, Plots
+```
 
 ## Usage
+
 The directory contains the following files,
 ```
 funcs_pnp.py # Formulation of PNP equation in UFL 
