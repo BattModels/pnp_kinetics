@@ -19,7 +19,7 @@ $`l = 2\times10^{-5}`$ m is the top height
 
 **3D render in Paraview**
 
-<img src="img/mesh_3d.png" alt="poisson" width="800">
+<img src="img/mesh_3d.png" alt="poisson" width="500">
 
 ## Governing equations
 
