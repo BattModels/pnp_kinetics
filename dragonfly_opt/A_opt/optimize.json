@@ -1,0 +1,12 @@
+{
+  "name": "mbabar",
+  "domain" : {
+    "A" : {
+      "name":"A",
+      "type":"discrete_numeric",
+      "items":"0:0.1:100"
+    }
+   }
+}
+  
+

@@ -1,0 +1,12 @@
+{
+  "name": "mbabar",
+  "domain" : {
+    "ko" : {
+      "name":"ko",
+      "type":"discrete_numeric",
+      "items":"0:0.00001:0.01"
+    }
+   }
+}
+  
+
