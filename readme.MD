@@ -1,7 +1,8 @@
 # Poisson-Nernst-Planck Kinetics
 
-Solving steady-state coupled Poisson-Nernst-Planck equation in an axisymmetric nanopipette crossection using Fenics 2019.1.0. 
-For illustration, we model four concentration species (K$`^{+}`$, Cl$`^{-}`$, Ru$`^{3+}`$ and Ru$`^{2+}`$), where Ruhex (Ruthenium hexamine) is actively underdoing redox at the bottom surface ($`z=0`$) with the electrode (twisted bilayer graphene). KCl is the supporting electrolyte. 
+Solve steady-state coupled Poisson-Nernst-Planck equations in 3D and axisymmetric 2D nanopipette meshes using Fenics 2019.1.0. We parallelized the implementation of Julia-based rate models and plugged it into MPI-enabled PDE solver for high throughput generation of voltammograms. For higher dimensional rate models (MHC+LDOS+QC) where axisymmetry breaks, one can employ the 3D solution of the PNP system. 
+
+For illustration, we model four concentration species (K$`^{+}`$, Cl$`^{-}`$, Ru$`^{3+}`$ and Ru$`^{2+}`$), where Ruhex (Ruthenium hexamine) is actively underdoing redox at the bottom surface ($`z=0`$) with the electrode (twisted bilayer graphene). Twisted bilayer graphene (tBLG) is a robust 2D flat band material, with tunable band structure and feasible computation of total and local density of states (DOS). KCl is the supporting electrolyte. 
 
 ## Mesh
 
@@ -44,23 +45,27 @@ $`i=4`$ : Ru$`^{2+}`$
 
 Boundary Conditions (BCs), 
 
-1) $` \phi = 0 `$ at $` z=l `$, $` 0 \le r \le a_{s}`$
-2) $`\phi = \phi_{o}`$ at $`z=0`$, $` 0 \le r \le a_{s}`$
+* $`\phi = 0 `$ at $` z=l `$, $` 0 \le r \le a_{s}`$
+* $`\phi = \phi_{o}`$ at $`z=0`$, $` 0 \le r \le a_{s}`$
 
 At the top surface, the concentration of K$`^{+}`$ and Ru$`^{3+}`$ are fixed and there is no redox reaction. Cl$`^{-}`$ concentration is obtained from charge neutrality. 
 These constraints are set Dirichlet boundary conditions at the top surface $`z=l`$, $` 0 \le r \le r_{s}`$.
 
-3) $`c_{1} = 100`$ mM , $`c_{2} = 106`$ mM, $`c_{3} = 2`$ mM and $`c_{4} = 0`$ mM  
+* $`c_{1} = 100`$ mM , $`c_{2} = 106`$ mM, $`c_{3} = 2`$ mM and $`c_{4} = 0`$ mM  
 
 Neumann condition  
-4) $`\frac{\partial c_{i}}{\partial n} = 0`$ (At the bottom and side surfaces if $`i=1,2`$. Only at the side surface if $`i=3,4`$) 
+* $`\frac{\partial c_{i}}{\partial n} = 0`$ (At the bottom and side surfaces if $`i=1,2`$. Only at the side surface if $`i=3,4`$) 
 <!--  <img src="img/neuman1.png" alt="neuman"> -->
 
 Coupled Robin condition at the bottom surface (for i=3,4)  
-5) $`-D_{o}\frac{\partial c_{3}}{\partial n} = D_{r}\frac{\partial c_{4}}{\partial n} = c_{3}k_{red} - c_{4}k_{ox}`$
+* $`J_{o} = -D_{o}\frac{\partial c_{3}}{\partial n} = D_{r}\frac{\partial c_{4}}{\partial n} = c_{3}k_{red} - c_{4}k_{ox}`$
 <!-- <img src="img/robin1.png" alt="robin">  -->
 
 where $`k_{red}`$ and $`k_{ox}`$ are the rate constants derived from the selected rate theory, and $`D_{o}`$ and $`D_{r}`$ are diffusivity coefficients of the oxidized and reduced species respectively.
+
+The total current is derived by,
+
+$$i = F\int_{0}^{a_{s}} F\int_{0}^{2\pi} J_{o}(r, \theta) r \text{d}r\text{d}\theta$$
 
 As described in [ElectrochemicalKinetics.jl](https://github.com/BattModels/ElectrochemicalKinetics.jl), the supported models are Butler-Volmer, Marcus Hush, Marcus Hush Chidsey (MHC) and MHC with density of states (DOS) models. Additional effect from Quantum Capacitance (QC) in low-dimensional materials is also incorporated.
 
