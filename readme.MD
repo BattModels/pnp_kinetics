@@ -18,6 +18,7 @@ $`z_{t} = 2\times10^{-5}`$ m is the top height
 The following PDEs are solved simultaneously,
 
 1) Poisson equation
+<img src="img/poisson.png" alt="poisson">
 $$\Delta \phi = \frac{-F}{\epsilon \epsilon_{o}} \sum_{j}z_{j}c_{j}$$
 
 2)  Nernst Planck equation
