@@ -52,7 +52,7 @@ Boundary Conditions (BCs),
 
 where $`V_{dl}`$ is the potential of the electric double layer (EDL). We assume a linear potential drop to the bottom surface ($`z=0`$) across the Helmholtz layer as shown in this schematic. 
 
-<img src="img/Vdl.png" alt="vdl">
+<img src="img/Vdl.png" alt="vdl" width="500">
 
 The applied potential ($`V_{app}`$) drops non-linearly across the EDL and the quantum capacitance in low dimensional materials, as described by [Yun Yu et al.](https://www.nature.com/articles/s41557-021-00865-1)
 
