@@ -7,5 +7,5 @@
 
 4. Plotting `iv_data.txt` gives a voltammogram with an expected shape.
 
-<img src="img/iv_3D.png" alt="iv" width="800">
+<img src="../../img/iv_3D.png" alt="iv" width="800">
 
