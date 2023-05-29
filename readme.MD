@@ -21,7 +21,7 @@ $`l = 2\times10^{-5}`$ m is the top height
 
 <img src="img/mesh_3d.png" alt="poisson" width="500">
 
-Mesh generation codes are in `pip_meshes/` directory.
+Mesh generation codes are in `gen_mesh/` directory. Navigate to `2D/` or `3D/` mesh generation.
 
 ## Governing equations
 
