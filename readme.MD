@@ -11,7 +11,7 @@ We model four concentration species (K$^{+}$, Cl$^{-}$, Ru$^{3+}$ and Ru$^{2+}$)
 
 where the four species are indexed by i=1,2,3,4.  
 Here,  
-$i=1$ : K$$^{+}$$  
+$`i=1`$ : K$`^{+}`$  
 $i=2$ : Cl$$^{-}$$  
 $i=3$ : Ru$$^{3+}$$  
 $i=4$ : Ru$$^{2+}$$  
@@ -48,8 +48,7 @@ pip install shyaml
 pip install ase
 pip install mat73
 
-3. Install Julia and create env to add necessary packages 
-Install julia from https://julialang.org/downloads/
+3. Install Julia (https://julialang.org/downloads/) and create env to add necessary packages 
 activate .
 add ArgParse, YAML, CSV, MAT, Glob, Interpolations, QuadGK, ClusterManagers, SharedArrays, Distributed, Zygote, SpecialFunctions
 add Dierckx, Optim, NLsolve, DataStructures, Plots
