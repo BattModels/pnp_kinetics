@@ -1,7 +1,7 @@
 ## Base config file for fenics PNP code
 
 # Mesh file
-mesh_file: /Users/mbabar/Desktop/PhD/Analysis/PDE/PNP_kinetics/gen_mesh/3D/mesh3D.xml
+mesh_file: '/Users/mbabar/Desktop/PhD/Analysis/PDE/PNP_solve/3D_vmg/mesh3D.xml'
 
 # Charge numbers K+, Cl-, Ru3+, Ru2+
 z_1: 1 
@@ -22,14 +22,14 @@ D_r: 1.19e-9 # Diff constant reduction (m^2/s)
 d_h: 0.5e-9 #0.5nm Stern layer thickness
 
 # Values from rate theory, edit if taking from elsewhere
-#rate_file: 'script.jl'
+rate_file: 'script.jl'
 k_o: 0.006
 Eo_redoxcouple: -0.25 # Ruhex Eo vs AgCl
 Eo_electrode: -0.18 # tBLG Eo vs AgCl
 V_dl: -0.291198576 #V Electrode potential
-Vapp: $ETA # Applied electrode potential for non-equilibrium rates
+Vapp: 0.0 # Applied electrode potential for non-equilibrium rates
 
 # Solution location
-sol_dir: $SOL_DIR
-sol_file: $SOL_FILE # in .h5 format
+sol_dir: 'Sol/'
+sol_file: 'test' # in .h5 format
 iv_file: 'iv_data.txt' # IV data storage for analysis

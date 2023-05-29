@@ -5,7 +5,7 @@ For illustration, we model four concentration species (K$`^{+}`$, Cl$`^{-}`$, Ru
 
 ## Mesh
 
-We assume dimensions of the mesh as taken by [Yun Yu et al.](https://www.nature.com/articles/s41557-021-00865-1). 2D schematic of the axisymmetric mesh of the nanopippete is shown,
+We assume dimensions of the mesh as taken by [Yun Yu et al.](https://www.nature.com/articles/s41557-021-00865-1) 2D schematic of the axisymmetric mesh of the nanopippete is shown,
 
 <img src="img/mesh_2d.png" alt="poisson" width="800">
 
@@ -95,12 +95,13 @@ add Dierckx, Optim, NLsolve, DataStructures, Plots
 
 The overall code is divided into main solve and post processing. The following file names are common in all directories,
 
-1. `funcs_pnp.py` : Helper functions for PNP solve, saving files and post processing. Additional functions for 3D mesh, bayesian optimization, and MHC+LDOS formulations.
-2. `pnp_par.py` : Main fenics code which solves the PNP equation. It loads mesh, constants from config.yml, specifies boundary conditions and the weak form. Parallelizabe with MPI. `pnp_par.py` for 2D and 3D meshes have adjusted boundary conditions. Also 3D-PNP with local DOS informed-MHC has additional features and interpolations in the weak form. 
-3. `solve_vmg.sh` : Main bash file that runs pnp_par.py while attaching necessary rate model data or calculating it using ElectrochemicalKinetics.jl. It makes directories and appends necessary paths in the config file.
-4. `get_current.py` : Post processing (PP) code for calculating the total current from redox reaction at the bottom surface for the given overpotential `Vapp`
-5. `process_vmg.sh` : Post processing bash file for running PP codes like get_current.py. User can add user-specific PP codes. 
-6. `run.sh` : Executable file that runs `solve_vmg.sh` and `process_vmg.sh`
+1. `config.yml` : Configuration file to load constants (prefactor, temperature, concentrations, charges etc.) and important paths (mesh, solution etc.). The config file is called repeatedly by different scripts to modify parameters like overpotential and solution paths. Short description of each parameter is in the file. 
+2. `funcs_pnp.py` : Helper functions for PNP solve, saving files and post processing. Additional functions for 3D mesh, bayesian optimization, and MHC+LDOS formulations.
+3. `pnp_par.py` : Main fenics code which solves the PNP equation. It loads mesh, constants from config.yml, specifies boundary conditions and the weak form. Parallelizabe with MPI. `pnp_par.py` for 2D and 3D meshes have adjusted boundary conditions. Also 3D-PNP with local DOS informed-MHC has additional features and interpolations in the weak form due to the extra real space dimension. 
+4. `solve_vmg.sh` : Main bash file that runs pnp_par.py while attaching necessary rate model data or calculating it using ElectrochemicalKinetics.jl. It makes directories and appends necessary paths in the config file.
+5. `get_current.py` : Post processing (PP) code for calculating the total current from redox reaction at the bottom surface for the given overpotential $`Vapp`$.
+6. `process_vmg.sh` : Post processing bash file for running PP codes like get_current.py. User can add user-specific PP codes. Parallelized over specified number of cores. 
+7. `run.sh` : Executable file that runs `solve_vmg.sh` and `process_vmg.sh`
 
 The directories have different tests and calculations. Usage description is detailed inside the directories.
 

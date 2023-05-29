@@ -23,8 +23,8 @@ fi
 #$(cat ${base_name}.yml | shyaml get-value sol_dir)
 
 # Define Vapp values
-low=-0.6
-high=0.2
+low=-0.4
+high=0.4
 incr=0.05
 Vapp=( $(seq $low $incr $high) )
 
@@ -44,7 +44,7 @@ do
         envsubst < ${base_name}.yml > ${SOL_FILE}.yml
         echo $SOL_FILE
         echo -e "Running ${fname} \n"
-        /Applications/Julia-1.6.app/Contents/Resources/julia/bin/julia $RATE_FILE $SOL_FILE
+        #/Applications/Julia-1.6.app/Contents/Resources/julia/bin/julia $RATE_FILE $SOL_FILE
         mpirun -np $num_cores python pnp_par.py $SOL_FILE
         #python get_current.py $SOL_FILE
         echo -e "Ended ${fname} \n"

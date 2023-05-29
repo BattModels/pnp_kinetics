@@ -48,7 +48,7 @@ print("Mesh geometry: a_s={}, a_t={}, z_t={}".format(a_s, a_t, z_t))
 #a_s, a_t, z_t = 1e-7, 3.5e-6, 2e-5
 
 ## Specify ko, Vdl, Vapp from config.yaml
-print('Vapp={}, Vdl={}, k_red={}, k_ox={}'.format(Vapp, V_dl, k_red, k_ox),'\n')
+print('Vapp={}, Vdl={}, k_o={}'.format(Vapp, V_dl, k_o),'\n')
 
 ## initialize phi                                                                                                                       
 # V_phi = FunctionSpace(mesh, 'P', 1)
@@ -127,28 +127,28 @@ g_2 = Expression('0.0', degree=deg)
 g_3 = Expression('0.0', degree=deg)
 g_4 = Expression('0.0', degree=deg)
 #m1 = dot(grad(c_3), n)                                                                                                                 
-#m1 = Dx(c_3,1) does not give correct solution  
-# kox, kred = BV_rates(k_o, eta=Vapp)
-# m1 = -(kred*c_3 - kox*c_4)/D_o # Rate theory input 
-# m2 = dot(grad(c_4), n)
-a = (1/kbT)
+#m1 = Dx(c_3,1) #does not give correct solution  
+kox, kred = BV_rates(k_o, eta=Vapp)
+m1 = -(kred*c_3 - kox*c_4)/D_o # Rate theory input 
+#m2 = dot(grad(c_4), n)
 
-V_k = FunctionSpace(mesh, MixedElement([P1, P1]))
-k_model = Function(V_k)
-u_bc = Model_rates(k_red, k_ox)
-k_model = interpolate(u_bc, V_k)
-kred_f, kox_f = k_model[0], k_model[1]
+# V_k = FunctionSpace(mesh, MixedElement([P1, P1]))
+# k_model = Function(V_k)
+# u_bc = Model_rates(k_red, k_ox)
+# k_model = interpolate(u_bc, V_k)
+# kred_f, kox_f = k_model[0], k_model[1]
 
 Func = (inner(grad(phi),grad(v)))*dx() - ((V_dl - phi)/d_h)*v*ds(1) \
     - (F/(eps*eps0))*(z_1*c_1 + z_2*c_2 + z_3*c_3 + z_4*c_4)*v*dx() + dphi_1*v*ds(0) \
-    + ((inner(grad(c_1), grad(q_1))) - ((z_1*a)*div(c_1*grad(phi))*q_1))*dx() \
-    + ((inner(grad(c_2), grad(q_2))) - ((z_2*a)*div(c_2*grad(phi))*q_2))*dx() \
-    + ((inner(grad(c_3), grad(q_3))) - ((z_3*a)*div(c_3*grad(phi))*q_3))*dx() \
-    + ((inner(grad(c_4), grad(q_4))) - ((z_4*a)*div(c_4*grad(phi))*q_4))*dx() \
+    + ((inner(grad(c_1), grad(q_1))) - ((z_1/kbT)*div(c_1*grad(phi))*q_1))*dx() \
+    + ((inner(grad(c_2), grad(q_2))) - ((z_2/kbT)*div(c_2*grad(phi))*q_2))*dx() \
+    + ((inner(grad(c_3), grad(q_3))) - ((z_3/kbT)*div(c_3*grad(phi))*q_3))*dx() \
+    + ((inner(grad(c_4), grad(q_4))) - ((z_4/kbT)*div(c_4*grad(phi))*q_4))*dx() \
     - g_1*q_1*ds() - g_2*q_2*ds() - g_3*q_3*ds(0) - g_4*q_4*ds(0) \
-    - (-(kred_f*c_3 - kox_f*c_4)/D_o)*q_3*ds(1) \
-    + (-(kred_f*c_3 - kox_f*c_4)/D_r)*q_4*ds(1) \
-    #- m1*q_3*ds(1) + (D_o/D_r)*m1*q_4*ds(1) \
+    - m1*q_3*ds(1) + (D_o/D_r)*m1*q_4*ds(1) \
+    #- (-(kred_f*c_3 - kox_f*c_4)/D_o)*q_3*ds(1) \
+    #+ (-(kred_f*c_3 - kox_f*c_4)/D_r)*q_4*ds(1) \
+    
 
 #a = lhs(Func)
 #L = rhs(Func)
@@ -214,38 +214,3 @@ if bbt_id<mesh.num_cells():
     d_c3.eval_cell(val, p, Cell(mesh, bbt_id))
     print("Process {}: dc3_dy (y=0) = {}".format(rank, val[0]))
 
-#os.system('python get_current.py '+str(sol_file)+'.h5')
-
-## Get current in parallel -- Lacks slight accuracy in result, use post-processing get_current.py
-# r_list = np.linspace(0,a_s,500)
-# th_list = np.linspace(0,2*np.pi,600)
-# Jo_mat = np.zeros((len(r_list), len(th_list)))
-# d_c3.set_allow_extrapolation(True)
-
-# def xy_coord(r, th):
-#     return [r*np.cos(th), r*np.sin(th)]
-
-# for j in range(len(r_list)):
-#     for k in range(len(th_list)):
-#         xy = xy_coord(r_list[j], th_list[k])
-#         point = np.array([xy[0], xy[1], 0.0])
-#         xy_point = Point(point)
-#         bbt_id = bbt.compute_first_entity_collision(xy_point)
-#         val = np.zeros(1)
-#         if bbt_id<mesh.num_cells():
-#             d_c3.eval_cell(val, point, Cell(mesh, bbt_id))
-#             Jo = -D_o*val[0]
-#             Jo_mat[j, k] = Jo
-#         else:
-#             Jo_mat[j, k] = 0
-
-# data_j = comm.gather(Jo_mat, root=0)
-# #print(data_j)
-
-# if rank==0:
-#     print(np.shape(data_j))
-#     print(np.shape(np.sum(data_j, axis=0)), '\n')
-#     Jo_mat = np.sum(data_j, axis=0)
-#     #print(Jo_mat)
-#     y = np.trapz(Jo_mat, x=th_list, axis=1)*r_list
-#     print(F*np.trapz(y, x=r_list))
