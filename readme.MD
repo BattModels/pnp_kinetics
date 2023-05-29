@@ -13,9 +13,9 @@ Here,
 
 $`a_{s} = 100`$ nm is the bottom radius
 
-$`a_{t} = 3.5\times10^{-6}`$ m is the bottom radius
+$`r_{s} = 3.5\times10^{-6}`$ m is the bottom radius
 
-$`z_{t} = 2\times10^{-5}`$ m is the top height
+$`l = 2\times10^{-5}`$ m is the top height
 
 ## Governing equations
 
@@ -42,7 +42,7 @@ Boundary Conditions (BCs),
 2) $`\phi = \phi_{o}`$ at $`z=0`$, $` 0 \le r \le a_{s}`$
 
 At the top surface, the concentration of K$`^{+}`$ and Ru$`^{3+}`$ are fixed and there is no redox reaction. Cl$`^{-}`$ concentration is obtained from charge neutrality. 
-These constraints are set Dirichlet boundary conditions at the top surface $`z=l`$, $` 0 \le r \le a_{t}`$.
+These constraints are set Dirichlet boundary conditions at the top surface $`z=l`$, $` 0 \le r \le r_{s}`$.
 
 3) $`c_{1} = 100`$ mM , $`c_{2} = 106`$ mM, $`c_{3} = 2`$ mM and $`c_{4} = 0`$ mM  
 
