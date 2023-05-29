@@ -1,4 +1,4 @@
-# Poisson-Nernst-Planck Solve
+# Poisson-Nernst-Planck Solve on 2D and 3D Nanopippete Meshes
 
 Solving coupled Poisson-Nernst-Planck equation in an axisymmetric nanopipette crossection using Fenics 2019.1.0. 
 For illustration, we model four concentration species (K$`^{+}`$, Cl$`^{-}`$, Ru$`^{3+}`$ and Ru$`^{2+}`$), where Ruhex (Ruthenium hexamine) is actively underdoing redox at the bottom surface ($`z=0`$) with the electrode (twisted bilayer graphene). KCl is the supporting electrolyte. 
@@ -9,7 +9,7 @@ For illustration, we model four concentration species (K$`^{+}`$, Cl$`^{-}`$, Ru
 
 $`a_{s} = 100`$ nm is the bottom radius
 
-$`a_{t} = 3.5\times10^{6}`$ m is the bottom radius
+$`a_{t} = 3.5\times10^{-6}`$ m is the bottom radius
 
 $`z_{t} = 2\times10^{-5}`$ m is the top height
 
@@ -64,8 +64,9 @@ pip install shyaml
 pip install ase
 pip install mat73
 ```
-3. Install Julia (https://julialang.org/downloads/) and create env to add necessary packages 
+3. Install Julia (https://julialang.org/downloads/). Clone ElectrochemicalKinetic.jl to local system. Make a new environment and add packages.
 ```
+
 activate .
 add ArgParse, YAML, CSV, MAT, Glob, Interpolations, QuadGK, ClusterManagers, SharedArrays, Distributed, Zygote, SpecialFunctions
 add Dierckx, Optim, NLsolve, DataStructures, Plots
@@ -87,3 +88,9 @@ pippete_pnp.ipynb # Benchmark and testing in jupyter notebook on nanopipette mes
 
 test_pnp.ipynb # Testing in jupyter notebook on simple square mesh
 ```
+
+## Notes 
+
+## Contributing
+
+We are happy to take pull requests for new features, new models, etc. by pull request! It is suggested (though not required) that you first open an issue to discuss.
