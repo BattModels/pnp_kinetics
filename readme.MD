@@ -17,11 +17,11 @@ $`r_{s} = 3.5\times10^{-6}`$ m is the bottom radius
 
 $`l = 2\times10^{-5}`$ m is the top height
 
-Mesh generation codes are in `pip_meshes/` directory.
-
 **3D render in Paraview**
 
 <img src="img/mesh_3d.png" alt="poisson" width="500">
+
+Mesh generation codes are in `pip_meshes/` directory.
 
 ## Governing equations
 
