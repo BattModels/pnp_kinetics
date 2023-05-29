@@ -93,29 +93,22 @@ add Dierckx, Optim, NLsolve, DataStructures, Plots
 
 ## Usage
 
-The following files are common in all directories,
+The overall code is divided into main solve and post processing. The following file names are common in all directories,
 
-1. `funcs_pnp.py` : Helper functions for solve, saving files and post processing. 
-2. `pnp_par.py` : Main fenics code which solves the PNP equation. It loads mesh, constants from config.yml, specifies boundary conditions and the weak form. The code works in parallel with MPI.
+1. `funcs_pnp.py` : Helper functions for PNP solve, saving files and post processing. Additional functions for 3D mesh, bayesian optimization, and MHC+LDOS formulations.
+2. `pnp_par.py` : Main fenics code which solves the PNP equation. It loads mesh, constants from config.yml, specifies boundary conditions and the weak form. Parallelizabe with MPI. `pnp_par.py` for 2D and 3D meshes have adjusted boundary conditions. Also 3D-PNP with local DOS informed-MHC has additional features and interpolations in the weak form. 
 3. `solve_vmg.sh` : Main bash file that runs pnp_par.py while attaching necessary rate model data or calculating it using ElectrochemicalKinetics.jl. It makes directories and appends necessary paths in the config file.
 4. `get_current.py` : Post processing (PP) code for calculating the total current from redox reaction at the bottom surface for the given overpotential `Vapp`
 5. `process_vmg.sh` : Post processing bash file for running PP codes like get_current.py. User can add user-specific PP codes. 
-6. `run.sh` : Executable file that runs solve_vmg.sh 
+6. `run.sh` : Executable file that runs `solve_vmg.sh` and `process_vmg.sh`
 
-These files can be used for different calculations 
-```
-funcs_pnp.py # Formulation of PNP equation in UFL 
+The directories have different tests and calculations. Additional description is inside indi
 
-run_pnp.py # Loads functions from funcs_pnp.py to iteratively converging to solution
-
-check_sol.py # Checks final concentration (c) and potential (phi) solution on boundary conditions and convergence.
-
-inital_c0.pkl # Loads initial guess vector for conc.
-
-pippete_pnp.ipynb # Benchmark and testing in jupyter notebook on nanopipette mesh
-
-test_pnp.ipynb # Testing in jupyter notebook on simple square mesh
-```
+1. `gen_mesh/` : Generate 2D and 3D meshes using [gmesh](https://gmsh.info/).
+2. `test_mesh/` : Test mesh convergence of PNP equations using simple Butler-Volmer (BV) rate model. I-V curve is calculated at a range of overpotentials $`Vapp`$. Can add other test suites.
+3. `dragonfly_opt/` : Bayesian optimization using [Dragonfly](https://dragonfly-opt.readthedocs.io/en/master/) of the BV rate constant $`k_{o}`$ and subsequent fit of voltammogram to analytical sigmoid function. Example has 10 iteration runs of optimization. Can perform multi-variable optimization of different rate model parameters like diffusion constants $`D_{o}, D_{r}`$ and MHC-prefactor $`A`$. Directory has a readme file with more detail.
+4. `dos_incorp/` : Solving PNP and voltammogram for MHC+DOS and QC modifications. Using a sample DOS of 2-deg twisted bilayer graphene.  
+5. `ldos_incorp` : Solving PNP and voltammogram using real space local DOS in MHC rate model. Using a sample LDOS of 2-deg twisted bilayer graphene. 
 
 ## Notes 
 * Use your Julia executable path where `.jl` script is run. 
