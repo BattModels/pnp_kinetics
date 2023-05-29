@@ -8,7 +8,9 @@ For illustration, we model four concentration species (K$`^{+}`$, Cl$`^{-}`$, Ru
 3D picture of the nanopippete mesh is shown,
 
 $`a_{s} = 100`$ nm is the bottom radius
+
 $`a_{t} = 3.5\times10^{6}`$ m is the bottom radius
+
 $`z_{t} = 2\times10^{-5}`$ m is the top height
 
 ## Governing equations
