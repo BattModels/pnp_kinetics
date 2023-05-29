@@ -1,0 +1,35 @@
+## Base config file for fenics PNP code
+
+# Mesh file
+mesh_file: /Users/mbabar/Desktop/PhD/Analysis/PDE/PNP_kinetics/gen_mesh/3D/mesh3D.xml
+
+# Charge numbers K+, Cl-, Ru3+, Ru2+
+z_1: 1 
+z_2: -1
+z_3: 3
+z_4: 2
+
+# Conc of Ruhex and KCl
+c_ruhex: 2
+c_KCl: 100
+eps: 80
+eps0: 8.854187e-12 # Vacuum permittivity F/m
+e: 1.60218e-19 # Coulombs 
+kbT: 0.0259 # eV, room temp
+F: 96485.332 # C/mol
+D_o: 8.43e-10 # Diff constant oxidation (m^2/s)
+D_r: 1.19e-9 # Diff constant reduction (m^2/s)
+d_h: 0.5e-9 #0.5nm Stern layer thickness
+
+# Values from rate theory, edit if taking from elsewhere
+#rate_file: 'script.jl'
+k_o: 0.006
+Eo_redoxcouple: -0.25 # Ruhex Eo vs AgCl
+Eo_electrode: -0.18 # tBLG Eo vs AgCl
+V_dl: -0.291198576 #V Electrode potential
+Vapp: 0.05 # Applied electrode potential for non-equilibrium rates
+
+# Solution location
+sol_dir: /Users/mbabar/Desktop/PhD/Analysis/PDE/PNP_kinetics/test_mesh/3D/Sol
+sol_file: /Users/mbabar/Desktop/PhD/Analysis/PDE/PNP_kinetics/test_mesh/3D/Sol/config_0.05 # in .h5 format
+iv_file: 'iv_data.txt' # IV data storage for analysis
