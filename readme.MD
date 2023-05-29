@@ -18,7 +18,7 @@ $`r_{s} = 3.5\times10^{-6}`$ m is the bottom radius
 $`l = 2\times10^{-5}`$ m is the top height
 
 **3D render in Paraview**
-<img src="img/side_3d.png" alt="poisson" width="800">
+<img src="img/side_3d.png" alt="poisson" width="200">
 
 ## Governing equations
 
