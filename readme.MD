@@ -1,4 +1,4 @@
-# Poisson-Nernst-Planck Solve on Nanopippetes
+# Poisson-Nernst-Planck Kinetics
 
 Solving steady-state coupled Poisson-Nernst-Planck equation in an axisymmetric nanopipette crossection using Fenics 2019.1.0. 
 For illustration, we model four concentration species (K$`^{+}`$, Cl$`^{-}`$, Ru$`^{3+}`$ and Ru$`^{2+}`$), where Ruhex (Ruthenium hexamine) is actively underdoing redox at the bottom surface ($`z=0`$) with the electrode (twisted bilayer graphene). KCl is the supporting electrolyte. 
