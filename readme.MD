@@ -18,7 +18,7 @@ $`i=4`$ : Ru$`^{2+}`$
 
 Boundary Conditions (BCs), 
 
-1) $` \phi = 0 `$ at $` z=l `$, $`a_{s}`$
+1) $` \phi = 0 `$ at $` z=l `$, $` \ge a_{s}`$
 2) $`\phi = \phi_{o}`$ at $`z=0`$, $`0<r<a_{s}`$
 
 Dirichlet charge neutrality at the top surface $`z=l`$, $`0<r<a_{s}`$  
