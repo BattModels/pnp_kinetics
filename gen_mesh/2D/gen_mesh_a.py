@@ -55,7 +55,7 @@ gmsh.model.geo.synchronize()
 gmsh.model.mesh.generate(2)
 
 # save it to disk
-gmsh.write("mesh_"+str(int(A))+"_test2.msh")
+gmsh.write("mesh_"+str(int(A))+"_test.msh")
 
 
 if '-nopopup' not in sys.argv:
