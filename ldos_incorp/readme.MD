@@ -1,6 +1,6 @@
 # MHC-LDOS model with PNP
 
-Implementing local DOS into MHC rate theory as BC to PNP equation in a 3D mesh. The local DOS does not obey axisymmetry, for which 2D interpolants for $`k_{ox}`$, $`k_{red}`$, $`V_{dl}`$ are calculated at the bottom surface. The interpolants output the value of these variables at the specified $`(r, \theta))`$. Accordingly, `pnp_par.py` is modified to support the increased dimensionality of the problem. New 2D interpolant functions are added to `funcs_pnp.py`.
+Implementing local DOS into MHC rate theory as BC to PNP equation in a 3D mesh. The local DOS does not obey axisymmetry, for which 2D interpolants for $`k_{ox}`$, $`k_{red}`$, $`V_{dl}`$ are calculated at the bottom surface. The interpolants output the value of these variables at the specified $`(r, \theta)`$. Accordingly, `pnp_par.py` is modified to support the increased dimensionality of the problem. New 2D interpolant functions are added to `funcs_pnp.py`.
 
 Rest all steps are similar to `dos_incorp/`,
 
