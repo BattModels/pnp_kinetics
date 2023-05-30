@@ -17,7 +17,7 @@ eps0: 8.854187e-12
 iv_file: iv_data.txt
 kbT: 0.0259
 lambda: 0.82
-mesh_file: /Users/mbabar/Desktop/PhD/Analysis/PDE/PNP_solve/3D_vmg/mesh3D.xml
+mesh_file: /Users/mbabar/Desktop/PhD/Analysis/PDE/PNP_kinetics/gen_mesh/3D/mesh3D.xml
 rate_file: script.jl
 sol_dir: $SOL_DIR
 sol_file: $SOL_FILE

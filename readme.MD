@@ -128,6 +128,8 @@ The directories have different tests and calculations. Usage description is deta
 4. `dos_incorp/` : Solving PNP and voltammogram for MHC+DOS and QC modifications. Using a sample DOS of 2-deg twisted bilayer graphene.  
 5. `ldos_incorp/` : Solving PNP and voltammogram using real space local DOS in MHC rate model. Using a sample LDOS of 2-deg twisted bilayer graphene. 
 
+All DOS and LDOS calculations are done using [Stephen Carr's tight binding model for tBLG](https://github.com/stcarr/kp_tblg)
+
 ## Notes 
 * Use your Julia executable path where `.jl` script is run. 
 * Change the $num_cores variable in `.sh` files for assigning different number of processes for parallelization.
