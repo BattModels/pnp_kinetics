@@ -99,7 +99,7 @@ pip install shyaml
 pip install ase
 pip install mat73
 ```
-3. [Install Julia](https://julialang.org/downloads/). Clone private fork of [ElectrochemicalKinetic.jl](https://github.com/mbabar09/ElectrochemicalKinetics/) to local system. Make a new environment and add packages.
+3. [Install Julia](https://julialang.org/downloads/). Clone private fork of [ElectrochemicalKinetics.jl](https://github.com/mbabar09/ElectrochemicalKinetics/) to local system. Make a new environment and add packages.
 ```
 git clone https://github.com/mbabar09/ElectrochemicalKinetics/ 
 cd ElectrochemicalKinetics.jl
