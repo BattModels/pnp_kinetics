@@ -32,7 +32,7 @@ The following PDEs are solved simultaneously,
 <img src="img/poisson.png" alt="poisson">
 <!-- $$\Delta \phi = \frac{-F}{\epsilon \epsilon_{o}} \sum_{j}z_{j}c_{j}$$ -->
 
-2)  Nernst Planck equation
+2)  Nernst Planck equation (steady state)
 <img src="img/nernst_planck.png" alt="nernst">
 <!-- $$D_{i}\Delta c_{i} = -\frac{z_{i}eD_{i}}{k_{B}T}\left( \nabla \left( c_{i}\nabla \phi\right) \right) $$ -->
 
