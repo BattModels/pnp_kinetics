@@ -16,8 +16,8 @@ One can specify multiple variables in the `optimize.json` and make subsequent ch
 
 As an example, the optimizer finds an accurate BV rate constant $`k_{o}`$ which fits the sigmoid function within 10 search iterations,
 
-<img src="../../img/opt.png" alt="iv" width="500">
-<img src="../../img/rmse.png" alt="iv" width="500">
+<img src="../img/opt.png" alt="iv" width="500">
+<img src="../img/rmse.png" alt="iv" width="500">
 
 
 ## Notes
