@@ -73,8 +73,6 @@ Coupled Robin condition at the bottom surface (for i=3,4)
 
 where $`k_{red}`$ and $`k_{ox}`$ are the rate constants derived from the selected rate theory, and $`D_{o}`$ and $`D_{r}`$ are diffusivity coefficients of the oxidized and reduced species respectively.
 
-Rest all boundary conditions are Neumann with zero flux at the side walls of the nanopippete.
-
 The total current is derived by,
 
 $$i = F\int_{0}^{a_{s}} \int_{0}^{2\pi} J_{o}(r, \theta) r \text{d}r\text{d}\theta$$
