@@ -43,9 +43,9 @@ $`i=2`$ : Cl$`^{-}`$
 $`i=3`$ : Ru$`^{3+}`$  
 $`i=4`$ : Ru$`^{2+}`$  
 
-Boundary Conditions (BCs), 
+##Boundary Conditions (BCs)
 
-1. Electric potential
+1. **Electric potential**
 * $`\phi = 0 `$ at $` z=l `$, $` 0 \le r \le a_{s}`$
 * $`\frac{\partial \phi}{\partial n} = (V_{dl} - \phi)/d_{h}`$ at $`z=0`$, $` 0 \le r \le a_{s}`$
 * $`\frac{\partial \phi}{\partial n} = 0`$ for the side walls
@@ -56,14 +56,14 @@ where $`V_{dl}`$ is the potential of the electric double layer (EDL). We assume 
 
 The applied potential ($`V_{app}`$) drops non-linearly across the EDL and the quantum capacitance in low dimensional materials, as described by [Yun Yu et al.](https://www.nature.com/articles/s41557-021-00865-1)
 
-2. Concentration
+2. **Concentration**
 
 At the top surface, the concentration of K$`^{+}`$ and Ru$`^{3+}`$ are fixed and there is no redox reaction. Cl$`^{-}`$ concentration is obtained from charge neutrality. 
 These constraints are set Dirichlet boundary conditions at the top surface $`z=l`$, $` 0 \le r \le r_{s}`$.
 
 * $`c_{1} = 100`$ mM , $`c_{2} = 106`$ mM, $`c_{3} = 2`$ mM and $`c_{4} = 0`$ mM  
 
-Neumann condition  
+Neumann condition
 * $`\frac{\partial c_{i}}{\partial n} = 0`$ (At the bottom and side surfaces if $`i=1,2`$. Only at the side surface if $`i=3,4`$) 
 <!--  <img src="img/neuman1.png" alt="neuman"> -->
 
