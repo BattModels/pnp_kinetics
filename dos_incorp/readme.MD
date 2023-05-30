@@ -8,7 +8,7 @@
 
 4. Plotting `iv_data.txt` with two different MHC-prefactors ($`1.0`$ and $`10.0`$) gives a voltammogram with the expected trend (higher prefactor --> greater slope).
 
-<img src="../../img/mhc_pref_test.png" alt="iv" width="500">
+<img src="../img/mhc_pref_test.png" alt="mhc_dos" width="500">
 
 ## Notes
 
