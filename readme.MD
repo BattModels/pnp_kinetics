@@ -43,7 +43,7 @@ $`i=2`$ : Cl$`^{-}`$
 $`i=3`$ : Ru$`^{3+}`$  
 $`i=4`$ : Ru$`^{2+}`$  
 
-##Boundary Conditions (BCs)
+### Boundary Conditions (BCs)
 
 1. **Electric potential**
 * $`\phi = 0 `$ at $` z=l `$, $` 0 \le r \le a_{s}`$
