@@ -33,7 +33,7 @@ if rank==0:
     for j in range(len(data_bm)):
         bm_list += list(data_bm[j])
     bm_coords = np.array(bm_list)
-    bot_coords = np.array([bm_coords[i] for i in range(len(bm_coords)) if np.allclose(bm_coords[i,2],0)])
+    bot_coords = np.array([bm_coords[i] for i in range(len(bm_coords)) if np.any(np.absolute(bm_coords[i,2]) < DOLFIN_EPS)])
     a_s = np.max(norm(bot_coords[:,:2], axis=1))
     z_t = np.max(bm_coords[:,2])
     top_coords = np.array([bm_coords[i] for i in range(len(bm_coords)) if np.allclose(bm_coords[i,2],z_t)])
