@@ -58,7 +58,7 @@ The applied potential ($`V_{app}`$) drops non-linearly across the EDL and the qu
 
 2. **Concentration**
 
-At the top surface, the concentration of K$`^{+}`$ and Ru$`^{3+}`$ are fixed and there is no redox reaction. Cl$`^{-}`$ concentration is obtained from charge neutrality. 
+At the top surface, the concentration of K$`^{+}`$ and Ru$`^{3+}`$ are fixed and there is no redox reaction. Cl$`^{-}`$ concentration is obtained from the charge neutrality condition. 
 These constraints are set Dirichlet boundary conditions at the top surface $`z=l`$, $` 0 \le r \le r_{s}`$.
 
 * $`c_{1} = 100`$ mM , $`c_{2} = 106`$ mM, $`c_{3} = 2`$ mM and $`c_{4} = 0`$ mM  
