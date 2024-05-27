@@ -1,0 +1,146 @@
+using Pkg; Pkg.activate("/Users/mbabar/Desktop/PhD/Analysis/Gerischer/")
+
+loc = "/Users/mbabar/Desktop/PhD/Analysis/Gerischer/ElectrochemicalKinetics.jl/src/"
+
+# Load libs
+using MAT
+using CSV
+using DelimitedFiles
+using Glob
+using Interpolations
+using QuadGK
+import YAML
+#using ElectrochemicalKinetics
+include(loc*"dos.jl")
+export DOS
+using .DOS: DOSData, get_dos
+export DOSData, get_dos
+include(loc*"quantum_capacitance.jl")
+include(loc*"kinetic_models.jl")
+export MarcusHushChidseyDOS
+include(loc*"rate_constant.jl")
+export compute_k, compute_k_cq
+
+# Load functions
+function integrand(
+    mhcd::MarcusHushChidseyDOS,
+    ox::Bool;
+    kT::Real = 0.026,
+    η::Real = 0.0,
+    V_q::Real = 0.0,
+)
+    function marcus_term(E)
+        local exp_arg
+        if ox
+            exp_arg = -(( E .+ mhcd.λ) .^ 2) ./ (4 * mhcd.λ * kT)
+        else
+            exp_arg = -(( E .- mhcd.λ) .^ 2) ./ (4 * mhcd.λ * kT)
+        end
+        exp.(exp_arg)
+    end
+    fd(E) = ox ? 1 .- fermi_dirac(E; kT = kT) : fermi_dirac(E; kT = kT)
+    E -> mhcd.A .* ((mhcd.dos.interp_func.(E .+ V_q)).^ 1) .* marcus_term(E .+ η) .* fd(E)
+end
+
+function compute_k_cq(
+    η,
+    model::MarcusHushChidseyDOS,
+    ox::Bool;
+    Eo = -0.07, # E_f,red (solvent) - E_f,vac (bilayer)
+    C_dl = 10.0,
+    Vq_min = -0.5,
+    Vq_max = 0.5,
+    kT = 0.026,
+    E_min = model.dos.E_min,
+    E_max = model.dos.E_max,
+)
+    V_dl_interp = calculate_Vdl_interp(model.dos.interp_func, Vq_min, Vq_max, C_dl)
+    #Vappl_data, Vdl_data = calculate_Vdl_interp(model.dos.interp_func, Vq_min, Vq_max, C_dl)
+    #v_interp = LinearInterpolation(Vappl_data, Vdl_data)
+    V_t = (Eo + η)
+    V_dl = V_dl_interp(V_t)
+    
+    #V_dl = v_interp(V_t)
+
+    V_q = V_t - V_dl
+    if V_q < 0
+        E_max = E_max .- 0.05
+        E_min = E_min .- V_q .+ 0.05
+    elseif V_q > 0
+        E_min = E_min .+ 0.05
+        E_max = E_max  .- V_q .- 0.05
+    end
+    #print(E_min, E_max)
+    k_rate = quadgk(integrand(model, ox; kT = kT, η = η, V_q = V_q), E_min, E_max)[1]
+    return k_rate, V_q
+end
+
+# Modify string
+function chop_str(str::String)
+         while str[length(str)] == '0'
+               str = chop(str)
+         end
+         if str[length(str)] == '.'
+            str = chop(str)
+         end
+         return str
+end
+
+# Load matlab dos data
+file = matopen("dos-th_2_nsamps_30_knum_24.mat")
+theta = read(file, "theta");
+E_list = read(file, "E_list");
+tdos = read(file, "dos");
+E_f = read(file, "E_f");
+
+# Get rate k
+if size(E_list)[1]==1 
+    E_list = transpose(E_list)    
+end
+if size(tdos)[1]==1 
+    tdos = transpose(tdos)    
+end
+dos = [E_list tdos]
+
+# Load config data
+config_loc = "config.yml"
+constants = YAML.load_file(config_loc)
+Vq_max = 0.6
+Vq_min = -0.6
+C_dl = 10.0
+lambda = 0.82
+A = 1.0
+Eo_rel = constants["Eo_redoxcouple"] - constants["Eo_electrode"] # eV, Relative Eo between Ruhex and tBLG
+η = constants["Vapp"] # eV, absolute overpotential, not wrt AgCl
+kT = constants["kbT"] #eV
+
+mhcd = MarcusHushChidseyDOS(A, lambda, dos, Ef=E_f) # Assuming Ef=0 (centered)
+# Compute rates
+kox,V_q = compute_k_cq(η, mhcd, true; Eo=Eo_rel, Vq_min=Vq_min, Vq_max=Vq_max);
+kred,V_q = compute_k_cq(η, mhcd, false; Eo=Eo_rel, Vq_min=Vq_min, Vq_max=Vq_max);
+
+# Update rate data in config file
+constants["V_dl"] = (Eo_rel + η) - V_q
+constants["k_ox"] = kox
+constants["k_red"] = kred
+YAML.write_file(config_loc, constants)
+
+print(kox,",",kred,",",constants["V_dl"],"\n")
+
+# Write rate data as .mat
+# file = matopen("k_data_"*string(A)*"_"*string(lambda)*"_"*string(η)*".mat", "w")
+# write(file, "kox_list", kox_data)
+# write(file, "kred_list", kred_data)
+# write(file, "q12_list", q12_list)
+# write(file, "q23_list", q23_list)
+# #write(file, "prefactor", factor)
+# close(file)
+
+
+##
+#@time begin
+#     mhcd = MarcusHushChidseyDOS(20.0, 0.82, dos)
+#     k = compute_k(0.4, mhcd; calc_cq=true, Vq_min=-0.45, Vq_max=0.45)
+#end
+
+

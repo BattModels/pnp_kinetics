@@ -1,0 +1,18 @@
+  Activating project at `/ocean/projects/cts180021p/mbabar/PhD/Gerischer`
+  Activating project at `/ocean/projects/cts180021p/mbabar/PhD/Gerischer`
+ERROR: LoadError: BoundsError: attempt to access 0-element Vector{String} at index [1]
+Stacktrace:
+ [1] getindex(A::Vector{String}, i1::Int64)
+   @ Base ./array.jl:861
+ [2] top-level scope
+   @ /ocean/projects/cts180021p/mbabar/PhD/PDE/PNP_solve/3D_vmg/ldos_incorp/k_data_nr_48/eta_run_script.jl:89
+in expression starting at /ocean/projects/cts180021p/mbabar/PhD/PDE/PNP_solve/3D_vmg/ldos_incorp/k_data_nr_48/eta_run_script.jl:89
+  Activating project at `/ocean/projects/cts180021p/mbabar/PhD/Gerischer`
+  Activating project at `/ocean/projects/cts180021p/mbabar/PhD/Gerischer`
+ERROR: LoadError: BoundsError: attempt to access 0-element Vector{String} at index [1]
+Stacktrace:
+ [1] getindex(A::Vector{String}, i1::Int64)
+   @ Base ./array.jl:861
+ [2] top-level scope
+   @ /ocean/projects/cts180021p/mbabar/PhD/PDE/PNP_solve/3D_vmg/ldos_incorp/k_data_nr_48/eta_run_script.jl:89
+in expression starting at /ocean/projects/cts180021p/mbabar/PhD/PDE/PNP_solve/3D_vmg/ldos_incorp/k_data_nr_48/eta_run_script.jl:89

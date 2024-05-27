@@ -1,0 +1,43 @@
+import numpy as np
+import os, sys, re, glob
+from dolfin import *
+from fenics import *
+import pickle
+from funcs_pnp import *
+from numpy.linalg import norm
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+from scipy.io import loadmat, savemat
+import yaml
+
+loc = '' # Location of base config file
+
+## Load base configuration file
+with open(loc+'config.yml', 'r') as file:
+    constants = yaml.safe_load(file)
+    globals().update(constants)
+
+base_dir = os.getcwd()+'/'
+if len(sys.argv) > 1:
+    run_dir = sys.argv[1]+'/'
+else:
+    run_dir = constants['sol_dir']
+
+## Specify rate data changes to config.yaml
+Vapp_list = np.linspace(-0.4, 0.4, 21)
+#Vdl_list = V_dl*np.ones(np.shape(Vapp_list))
+#ko_list = k_o*np.ones(np.shape(Vapp_list))
+
+## Write config file
+base_name = 'config'
+for i in range(len(Vapp_list)):
+    print('Generating config file '+base_name+'_'+str(i)+'.yml')
+    os.system('julia '+constants['rate_script']) # Run rate model for kred, kox and other parameters
+    #constants['Vapp'], constants['V_dl'], constants['k_o']  = float(Vapp_list[i]), float(Vdl_list[i]), float(ko_list[i])
+    #print(constants['Vapp'], constants['V_dl'], constants['k_ox'], constants['k_red'])
+    constants['sol_dir'] = base_dir+run_dir#+base_name+str(i)+'/'
+    #os.system('mkdir -p '+constants['sol_dir'])
+    constants['sol_file'] = base_name+'_'+str(i)
+    fname = constants['sol_dir']+base_name+'_'+str(i)+'.yml'
+    write_yml(constants, fname=fname)
+

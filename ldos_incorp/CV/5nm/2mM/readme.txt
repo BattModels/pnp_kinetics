@@ -1,0 +1,9 @@
+# Code file information
+
+resolve_I.txt : Resolved current results
+
+solve_vmg.sh : Double parallel code, in for loop for Vapp and in mpirun
+
+funcs_pnp.py : Has additional function 'center_domain'
+
+run_jobs.py : Use to manipulate config.yml file, e.g. domain = AB

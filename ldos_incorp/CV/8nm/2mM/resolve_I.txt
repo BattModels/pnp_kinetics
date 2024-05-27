@@ -1,0 +1,4 @@
+pipR(nm) conc(mM) theta(deg) limI(fA) maxI(fA) V_maxI(V) Ispot
+8 2 0.77 -261.5574 17.5799 -0.042 AA
+
+

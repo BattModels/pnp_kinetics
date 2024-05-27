@@ -1,0 +1,40 @@
+## Base config file for fenics PNP code
+
+# Mesh file
+mesh_file: /home/mbabar/PhD/PNP_solve/3D_vmg/Mesh/Testing/mesh_10.xml
+
+# Charge numbers K+, Cl-, Ru3+, Ru2+
+z_1: 1 
+z_2: -1
+z_3: 3
+z_4: 2
+
+# Conc of Ruhex and KCl
+c_ruhex: 2
+c_KCl: 100
+eps: 80
+eps0: 8.854187e-12 # Vacuum permittivity F/m
+e: 1.60218e-19 # Coulombs 
+kbT: 0.0259 # eV, room temp
+F: 96485.332 # C/mol
+D_o: 3.7e-10 #8.43e-10 # Diff constant oxidation (m^2/s)
+D_r: 3.7e-10 #1.19e-9 # Diff constant reduction (m^2/s)
+d_h: 0.5e-9 #0.5nm Stern layer thickness
+
+# Values from rate theory, or specify rates from a mat-file (rate_loc)
+rate_file: eta_run_script.jl # Rate calculating code location
+dos_file: /home/mbabar/PhD/tBLG_Carr/kp_tblg/MATLAB_vers/TBG_data/ldos-th_2.0_nsamps_50_knum_24.mat
+rate_loc: /home/mbabar/PhD/PNP_solve/3D_vmg/ldos_incorp/k_data_Vapp_0.0.mat
+Eo_redoxcouple: -0.25 # Ruhex Eo vs AgCl
+Eo_electrode: -0.18 # tBLG Eo vs AgCl
+V_dl: -0.291198576 #V Electrode potential
+Vapp: $ETA # Applied electrode potential for non-equilibrium rates
+C_dl: 10.0
+lambda: 0.82
+MHC_prefactor: 10.0 # Prefactor for MHC
+#k_o: 0.006
+
+# Solution location
+sol_dir: $SOL_DIR
+sol_file: $SOL_FILE
+iv_file: 'iv_data.txt' # IV data storage for analysis

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<VTKFile type="PUnstructuredGrid" version="0.1">
+  <PUnstructuredGrid GhostLevel="0">
+    <PPoints>
+      <PDataArray type="Float64" NumberOfComponents="3" />
+    </PPoints>
+    <PCellData>
+      <PDataArray type="UInt32" Name="connectivity" />
+      <PDataArray type="UInt32" Name="offsets" />
+      <PDataArray type="UInt8" Name="types" />
+    </PCellData>
+    <PPointData Scalars="f_76">
+      <PDataArray type="Float64" Name="f_76" NumberOfComponents="0" />
+    </PPointData>
+    <Piece Source="kox_f_p0_000000.vtu" />
+    <Piece Source="kox_f_p1_000000.vtu" />
+    <Piece Source="kox_f_p2_000000.vtu" />
+  </PUnstructuredGrid>
+</VTKFile>
