@@ -1,0 +1,12 @@
+# File name guidance
+
+resolve_I.txt : Resolved current results from calculations; maxI, V(maxI) and limI for spec. conc and pipR
+
+solve_vmg.sh : Double parallel code, in for loop for Vapp and in mpirun
+
+funcs_pnp.py : Has additional function 'center_domain'
+
+gen_config.py : Use to manipulate config.yml file, e.g. domain = AB, and generates job files
+Run jobs as, e.g. sbatch 1.1/job.sh
+
+Single_runs/ : Already have config file somewhere, but recalculate current at limited Vapp_list
