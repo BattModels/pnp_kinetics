@@ -113,7 +113,7 @@ The overall code is divided into main solve and post processing. The following f
 1. `config.yml` : Configuration file to load constants (prefactor, temperature, concentrations, charges etc.) and important paths (mesh, solution etc.). The config file is called repeatedly by different scripts to modify parameters like overpotential and solution paths. Short description of each parameter is in the file. 
 2. `funcs_pnp.py` : Helper functions for PNP solve, saving files and post processing. Additional functions for 3D mesh, bayesian optimization, and MHC+LDOS formulations.
 3. `pnp_par.py` : Main fenics code which solves the PNP equation. It loads mesh, constants from config.yml, specifies boundary conditions and the weak form. Parallelizabe with MPI. `pnp_par.py` for 2D and 3D meshes have adjusted boundary conditions. Also 3D-PNP with local DOS informed-MHC has additional features and interpolations in the weak form due to the extra real space dimension. 
-4. `solve_vmg.sh` : Main bash file that runs pnp_par.py while attaching necessary rate model data or calculating it using ElectrochemicalKinetics.jl. It makes directories and appends necessary paths in the config file.
+4. `solve_vmg.sh` : Main bash file that runs pnp_par.py while attaching necessary rate model data or calculating it using ElectrochemicalKinetics.jl. It makes directories and appends necessary paths in the config file. Can specify number of cores for parallelization.
 5. `get_current.py` : Post processing (PP) code for calculating the total current from redox reaction at the bottom surface for the given overpotential $`Vapp`$.
 6. `process_vmg.sh` : Post processing bash file for running PP codes like get_current.py. User can add user-specific PP codes. Parallelized over specified number of cores. 
 7. `run.sh` : Executable file that runs `solve_vmg.sh` and `process_vmg.sh`
@@ -125,6 +125,7 @@ The directories have different tests and calculations. Usage description is deta
 3. `dragonfly_opt/` : Bayesian optimization using [Dragonfly](https://dragonfly-opt.readthedocs.io/en/master/) of the BV rate constant $`k_{o}`$ and subsequent fit of voltammogram to analytical sigmoid function. Example has 10 iteration runs of optimization. Can perform multi-variable optimization of different rate model parameters like diffusion constants $`D_{o}, D_{r}`$ and MHC-prefactor $`A`$. Directory has a readme file with more detail.
 4. `dos_incorp/` : Solving PNP and voltammogram for MHC+DOS and QC modifications. Using a sample DOS of 2-deg twisted bilayer graphene.  
 5. `ldos_incorp/` : Solving PNP and voltammogram using real space local DOS in MHC rate model. Using a sample LDOS of 2-deg twisted bilayer graphene. 
+6. `tutorial_pnp/` : Tutorial for solving PNP equations using simple Butler-Volmer rates. Main solve contained in `notebook.ipynb`. Employs original mesh `mesh3D.xml` from [Nature Chemistry paper](https://www.nature.com/articles/s41557-021-00865-1).   
 
 All DOS and LDOS calculations are done using [Stephen Carr's tight binding model for tBLG](https://github.com/stcarr/kp_tblg)
 
