@@ -12,6 +12,23 @@ Rest all steps are similar to `dos_incorp/`,
 
 4. Plot `iv_data.txt`
 
+Directory information:
+1. `CV/` : Contains scripts for calculating cyclic voltammograms.
+
+2. `Current_map/` : Scripts for calculating current response in real space, moire supercell of twisted bilayer graphene.
+
+3. `Ilim/` : For calculating mass limited current at negative enough overpotential, as a function of orifice cross-section radius.
+
+4. `KCl_conc/` : Solution sensitivity with changing concentration of the supporting electrolyte. Directory made in response to reviewers' comment to reduce the effect from ionic current rectification (ICR) that causes hysteresis in voltammograms. 
+
+5. `Single_run/` : Script for testing solution at different parameters. 
+
+6. `ko_integral_map/` : Directory for testing and visualizing the interpolating function of kinetic rates on moire supercell coordinates.
+
+7. `k_data_nr_48/` : High quality MHC-DoS model rate data calculated using [`ElectrchemicalKinetics.jl`](https://github.com/BattModels/ElectrochemicalKinetics.jl) package.
+
+8. `1.1/`, `2.0/`, `test/` and rest all directories are for further testing. 
+
 ## Notes
 
 * Make bash files executable by running `chmod +x run.sh solve_vmg.sh process_vmg.sh`
