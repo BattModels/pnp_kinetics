@@ -96,6 +96,7 @@ pip install dragonfly-opt -v
 pip install shyaml
 pip install ase
 pip install mat73
+pip install vedo
 ```
 3. [Install Julia](https://julialang.org/downloads/). Clone private fork of [ElectrochemicalKinetics.jl](https://github.com/mbabar09/ElectrochemicalKinetics/) to local system. Make a new environment and add packages.
 ```
